@@ -2,36 +2,106 @@
 DROP DATABASE chatapp;
 DROP USER 'testuser';
 
+/*テーブルをCRUDできるユーザー作成*/
 CREATE USER 'testuser' IDENTIFIED BY 'testuser';
 CREATE DATABASE chatapp;
 USE chatapp
+
+/*ユーザーに権限の付与*/
 GRANT ALL PRIVILEGES ON chatapp.* TO 'testuser';
 
+/*
+*
+*全てのユーザーのデータが格納されているテーブル
+*
+*/
 CREATE TABLE users (
-    uid VARCHAR(255) PRIMARY KEY,
+    uid BIGINT PRIMARY KEY,
     user_name VARCHAR(255) UNIQUE NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL
+    birth_date INT,
+    introduce VARCHAR(255) NOT NULL,
+    pass VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE channels (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    uid VARCHAR(255) NOT NULL,
-    name VARCHAR(255) UNIQUE NOT NULL,
-    abstract VARCHAR(255),
-    FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE
-);
-
-CREATE TABLE messages (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    uid VARCHAR(255) NOT NULL,
-    cid INT NOT NULL,
+/*
+*
+*グループ向けのメッセージテーブル？
+*
+*/
+CREATE TABLE messageGroup (
+    mgid BIGINT AUTO_INCREMENT PRIMARY KEY,　
+    uid BIGINT PRIMARY KEY,
     message TEXT,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    image LONGBLOB,
+    created_at datetime NOT NULL,
     FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE,
-    FOREIGN KEY (cid) REFERENCES channels(id) ON DELETE CASCADE
+    FOREIGN KEY (room) REFERENCES room(mid) ON DELETE CASCADE
 );
 
-INSERT INTO users(uid, user_name, email, password) VALUES('970af84c-dd40-47ff-af23-282b72b7cca8','テスト','test@gmail.com','37268335dd6931045bdcdf92623ff819a64244b53d0e746d438797349d4da578');
-INSERT INTO channels(id, uid, name, abstract) VALUES(1, '970af84c-dd40-47ff-af23-282b72b7cca8','ぼっち部屋','テストさんの孤独な部屋です');
-INSERT INTO messages(id, uid, cid, message) VALUES(1, '970af84c-dd40-47ff-af23-282b72b7cca8', '1', '誰かかまってください、、')
+
+/*
+*
+*個人チャット向けのメッセージテーブル？
+*
+*/
+CREATE TABLE messagePairs(
+    mpid BIGINT AUTO_INCREMENT PRIMARY KEY,
+    uid BIGINT PRIMARY KEY,
+    message TEXT,
+    image LONGBLOB,
+    created_at datetime NOT NULL,
+    FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE,
+    FOREIGN KEY (room) REFERENCES room(mid) ON DELETE CASCADE
+);
+
+
+/*
+*
+*学校データ格納テーブル
+*
+*/
+CREATE TABLE school (
+    sid BIGINT AUTO_INCREMENT PRIMARY KEY,
+    school_name VARCHAR(255) NOT NULL,
+    school_type int(1), /*幼稚園：１　小学校：２*/
+    location CHAR
+);
+
+
+/*
+*
+*各ユーザーの小学生時代テーブル
+*
+*/
+CREATE TABLE elementaryHistory(
+    history_id BIGINT PRIMARY KEY,
+    uid BIGINT,
+    sid BIGINT AUTO_INCREMENT,
+    class_name INT,
+    elementary_startYear INT,
+    elementary_endYear INT,
+    elementary_gradeStart INT,
+    elementary_gradeEnd INT
+    FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE,
+    FOREIGN KEY (sid) REFERENCES school(uid) ON DELETE CASCADE
+)
+
+
+/*
+*
+*各ユーザーの幼稚園時代テーブル
+*
+*/
+CREATE TABLE kindergardenHistory(
+    history_id BIGINT PRIMARY KEY,
+    uid BIGINT,
+    sid BIGINT AUTO_INCREMENT,
+    class_name INT,
+    elementary_startYear INT,
+    elementary_endYear INT,
+    elementary_gradeStart INT,
+    elementary_gradeEnd INT
+    FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE,
+    FOREIGN KEY (sid) REFERENCES school(uid) ON DELETE CASCADE
+)
