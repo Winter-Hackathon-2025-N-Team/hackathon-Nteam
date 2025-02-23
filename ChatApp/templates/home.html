@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ホーム</title>
+</head>
+<body>
+    <h2>ホームページ</h2>
+    <p>ログイン成功しました！</p>
+    <form action="{{ url_for('logout') }}" method="post">
+        <button type="submit">ログアウト</button>
+    </form>
+</body>
+</html>
