@@ -1,24 +1,352 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="jp">
 <head>
-    <meta charset="UTF-8">
-    <title>サインアップ</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>signup</title>
+    <link rel="stylesheet" href="../static/css/auth.css">
+    <link rel="stylesheet" href="../static/css/color.css">
+    <link rel="stylesheet" href="../static/css/auth.css">
 </head>
+
 <body>
-    <h2>サインアップ</h2>
-    <form action="{{ url_for('signup_process') }}" method="post">
-        <label>名前: <input type="text" name="name" required></label><br>
-        <label>メール: <input type="email" name="email" required></label><br>
-        <label>パスワード: <input type="password" name="password" required></label><br>
-        <label>パスワード確認: <input type="password" name="passwordConfirmation" required></label><br>
-        <label>幼稚園名: <input type="text" name="kindergartenName" required></label><br>
-        <label>入学年(1900以上2100未満): <input type="number" name="startYearKindergarten" required></label><br>
-        <label>卒業年(1900以上2100未満): <input type="number" name="endYearKindergarten" required></label><br>
-        <label>小学校名: <input type="text" name="elementarySchoolName" required></label><br>
-        <label>入学年(1900以上2100未満): <input type="number" name="startYearElementarySchool" required></label><br>
-        <label>卒業年(1900以上2100未満): <input type="number" name="endYearElementarySchool" required></label><br>
-        <button type="submit">登録</button>
-    </form>
-    <p>すでに登録済みですか？ <a href="{{ url_for('login_view') }}">ログイン</a></p>
+    <div class="auth-wrapper">
+        <div class="auth-container">
+            <div class="auth-form-wrapper">
+                                    <!--
+                <form class="auth-form signup" action="home.html" method="get">
+                -->
+                <form class="auth-form signup" action="{{ url_for('signup_process') }}" method="post">
+                    <h1 class="auth-title">サインアップ</h1>
+                    <h2 class="auth-title2">基本情報を入力してください</h2>
+                    <!--
+                    <div>
+                        <label for="signup-icon-input">アイコン画像</label>
+                        <input type="file" placeholder="Icon" name="icon" id="signup-icon-input" />
+                    </div>
+                    -->
+                    <div>
+                        <label for="signup-name-input">名前</label>
+                        <input type="text" placeholder="Name" name="name" id="signup-name-input" required/>
+                    </div>
+                    <div>
+                        <label for="signup-email-input">メール</label>
+                        <input type="text" placeholder="Email" name="email" id="signup-email-input" required/>
+                    </div>
+                    <div>
+                        <label for="signup-password-input">パスワード</label>
+                        <input type="password" placeholder="Password" name="password" id="signup-password-input" required/>
+                    </div>
+                    <div>
+                        <label for="signup-password-confirmation-input">
+                            パスワード確認
+                        </label>
+                        <input type="password" placeholder="Password Confirmation" name="passwordConfirmation"
+                            id="signup-password-confirmation-input" required/>
+                    </div>
+                    <!--
+                    <div>
+                        <label for="signup-introduction-input">
+                            自己紹介
+                        </label>
+                        <input type="text" placeholder="Introduction" name="introduction"
+                            id="signup-introduction-input" />
+                    </div>
+                    -->
+                    <h2 class="auth-title2">出身園を選択してください</h2>
+                    <!--
+                    <h3 class="auth-title3">年少</h3>
+                    -->
+                    <div>
+                        <label for="signup-prefectures-nensyo">都道府県：</label>
+                        <select class="prefectures" id="signup-prefectures-nensyo" name="prefectures-nensyo"
+                            data-id="kindergarten_nensyo">
+                            <option value="">選択してください</option>
+                        </select>
+                        <label for="signup-municipalities-nensyo">市区町村：</label>
+                        <select class="municipalities" id="signup-municipalities-nensyo"
+                            name="municipalities-nensyo" data-id="kindergarten_nensyo" disabled>
+                            <option value="">選択してください</option>
+                        </select>
+                        <label for="signup-kindergarten-schoolname-nensyo">出身園：</label>
+                        <select class="school_name" id="signup-kindergarten-schoolname-nensyo"
+                            name="kindergartenName" data-id="kindergarten_nensyo" disabled>
+                            <option value="">選択してください</option>
+                        </select>
+                    </div>
+                    <!--
+                    <div>
+                        <label for="signup-kindergarten-class-nensyo">クラス</label>
+                        <input type="text" name="kindergarten-class-nensyo" id="signup-kindergarten-class-nensyo" />
+                    </div>
+                    -->
+                    <div>
+                        <label for="signup-kindergarten-start-nensyo">入園年(1900以上2100未満)</label>
+                        <input type="number" min="1900" max="2100" name="startYearKindergarten" id="signup-kindergarten-start-nensyo" required/>
+                    </div>
+                    <div>
+                        <label for="signup-kindergarten-end-nensyo">卒園年(1900以上2100未満)</label>
+                        <input type="number" min="1900" max="2100" name="endYearKindergarten" id="signup-kindergarten-end-nensyo" required/>
+                    </div>
+                    <!--
+                    <h3 class="auth-title3">年中</h3>
+                    <div>
+                        <label for="signup-prefectures-nenchu">都道府県：</label>
+                        <select class="prefectures" id="signup-prefectures-nenchu" name="prefectures-nenchu"
+                            data-id="kindergarten_nenchu">
+                            <option value="">選択してください</option>
+                        </select>
+                        <label for="signup-municipalities-nenchu">市区町村：</label>
+                        <select class="municipalities" id="signup-municipalities-nenchu"
+                            name="municipalities-nenchu" data-id="kindergarten_nenchu" disabled>
+                            <option value="">選択してください</option>
+                        </select>
+                        <label for="signup-kindergarten-schoolname-nenchu">出身園：</label>
+                        <select class="school_name" id="signup-kindergarten-schoolname-nenchu"
+                            name="school_name-nenchu" data-id="kindergarten_nenchu" disabled>
+                            <option value="">選択してください</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="signup-kindergarten-class-nenchu">クラス</label>
+                        <input type="text" name="kindergarten-class-nenchu" id="signup-kindergarten-class-nenchu" />
+                    </div>
+                    <div>
+                        <label for="signup-kindergarten-start-nenchu">在籍期間</label>
+                        <input type="month" name="kindergarten-start-nenchu" id="signup-kindergarten-start-nenchu" />
+                        <label for="signup-kindergarten-end-nenchu">～</label>
+                        <input type="month" name="kindergarten-end-nenchu" id="signup-kindergarten-end-nenchu" />
+                    </div>    
+                    <h3 class="auth-title3">年長</h3>
+                    <div>
+                        <label for="signup-prefectures-nencho">都道府県：</label>
+                        <select class="prefectures" id="signup-prefectures-nencho" name="prefectures-nencho"
+                            data-id="kindergarten_nencho">
+                            <option value="">選択してください</option>
+                        </select>
+                        <label for="signup-municipalities-nencho">市区町村：</label>
+                        <select class="municipalities" id="signup-municipalities-nencho"
+                            name="municipalities-nencho" data-id="kindergarten_nencho" disabled>
+                            <option value="">選択してください</option>
+                        </select>
+                        <label for="signup-kindergarten-schoolname-nencho">出身園：</label>
+                        <select class="school_name" id="signup-kindergarten-schoolname-nencho"
+                            name="school_name-nencho" data-id="kindergarten_nencho" disabled>
+                            <option value="">選択してください</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="signup-kindergarten-class-nencho">クラス</label>
+                        <input type="text" name="kindergarten-class-nencho" id="signup-kindergarten-class-nencho" />
+                    </div>
+                    <div> 
+                        <label for="signup-kindergarten-start-nenchu">在籍期間</label>
+                        <input type="month" name="kindergarten-start-nencho" id="signup-kindergarten-start-nencho" />
+                        <label for="signup-kindergarten-end-nencho">～</label>
+                        <input type="month" name="kindergarten-end-nencho" id="signup-kindergarten-end-nencho" />
+                    </div>
+                    -->
+                    <h2 class="auth-title2">出身小学校を選択してください</h2>
+                    <!--
+                    <h3 class="auth-title3">一年生</h3>
+                                        -->
+
+                    <div>
+                    <label for="signup-prefectures1">都道府県：</label>
+                        <select class="prefectures" id="signup-prefectures1" name="prefectures1"
+                            data-id="elementary1">
+                            <option value="">選択してください</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="signup-municipalities1">市区町村：</label>
+                        <select class="municipalities" id="signup-municipalities1" name="municipalities1"
+                            data-id="elementary1" disabled>
+                            <option value="">選択してください</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="signup-elementary-schoolname1">出身小学校：</label>
+                        <select class="school_name" id="signup-elementary-schoolname1" name="elementarySchoolName"
+                            data-id="elementary1" disabled>
+                            <option value="">選択してください</option>
+                        </select>
+                    </div>
+                    <!--
+                    <div>
+                        <label for="signup-elementary-class1">クラス</label>
+                        <input type="text" name="elementary-class1" id="signup-elementary-class1"/>
+                    </div>
+                    -->
+                    <div>
+                        <label for="signup-elementary-start1">入学年(1900以上2100未満)</label>
+                        <input type="number" min="1900" max="2100" name="startYearElementarySchool" id="signup-elementary-start1" required/>
+                    </div>
+                    <div>
+                        <label for="signup-elementary-end1">卒業年(1900以上2100未満)</label>
+                        <input type="number" min="1900" max="2100" name="endYearElementarySchool" id="signup-elementary-end1" required/>
+                    </div>
+                    <!--
+                    <h3 class="auth-title3">二年生</h3>
+                    <div>
+                        <label for="signup-prefectures2">都道府県：</label>
+                        <select class="prefectures" id="signup-prefectures2" name="prefectures2"
+                            data-id="elementary2">
+                            <option value="">選択してください</option>
+                        </select>
+                        <label for="signup-municipalities2">市区町村：</label>
+                        <select class="municipalities" id="signup-municipalities2" name="municipalities2"
+                            data-id="elementary2" disabled>
+                            <option value="">選択してください</option>
+                        </select>
+                        <label for="signup-elementary-schoolname2">出身小学校：</label>
+                        <select class="school_name" id="signup-elementary-schoolname2" name="school_name2"
+                            data-id="elementary2" disabled>
+                            <option value="">選択してください</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="signup-elementary-class2">クラス</label>
+                        <input type="text" name="elementary-class2" id="signup-elementary-class2"/>
+                    </div>
+                    <div>
+                        <label for="signup-elementary-start2">在籍期間</label>
+                        <input type="month" name="elementary-start2" id="signup-elementary-start2"/>
+                        <label for="signup-elementary-end2">～</label>
+                        <input type="month" name="elementary-end2" id="signup-elementary-end2" />
+                    </div>
+                    <h3 class="auth-title3">三年生</h3>
+                    <div>
+                        <label for="signup-prefectures3">都道府県：</label>
+                        <select class="prefectures" id="signup-prefectures3" name="prefectures3"
+                            data-id="elementary3">
+                            <option value="">選択してください</option>
+                        </select>
+                        <label for="signup-municipalities3">市区町村：</label>
+                        <select class="municipalities" id="signup-municipalities3" name="municipalities3"
+                            data-id="elementary3" disabled>
+                            <option value="">選択してください</option>
+                        </select>
+                        <label for="signup-elementary-schoolname3">出身小学校：</label>
+                        <select class="school_name" id="signup-elementary-schoolname3" name="school_name3"
+                            data-id="elementary3" disabled>
+                            <option value="">選択してください</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="signup-elementary-class3">クラス</label>
+                        <input type="text" name="elementary-class3" id="signup-elementary-class3"/>
+                    </div>
+                    <div>
+                        <label for="signup-elementary-start3">在籍期間</label>
+                        <input type="month" name="elementary-start3" id="signup-elementary-start3"/>
+                        <label for="signup-elementary-end3">～</label>
+                        <input type="month" name="elementary-end3" id="signup-elementary-end3"/>
+                    </div>
+                    <h3 class="auth-title3">四年生</h3>
+                    <div class="select-block">
+                        <label for="signup-prefectures4">都道府県：</label>
+                        <select class="prefectures" id="signup-prefectures4" name="prefectures4"
+                            data-id="elementary4">
+                            <option value="">選択してください</option>
+                        </select>
+                        <label for="signup-municipalities4">市区町村：</label>
+                        <select class="municipalities" id="signup-municipalities4" name="municipalities4"
+                            data-id="elementary4" disabled>
+                            <option value="">選択してください</option>
+                        </select>
+                        <label for="signup-elementary-schoolname4">出身小学校：</label>
+                        <select class="school_name" id="signup-elementary-schoolname4" name="school_name4"
+                            data-id="elementary4" disabled>
+                            <option value="">選択してください</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="signup-elementary-class4">クラス</label>
+                        <input type="text" name="elementary-class4" id="signup-elementary-class4"/>
+                    </div>
+                    <div>
+                        <label for="signup-elementary-start4">在籍期間</label>
+                        <input type="month" name="elementary-start4" id="signup-elementary-start4"/>
+                        <label for="signup-elementary-end4">～</label>
+                        <input type="month" name="elementary-end4" id="signup-elementary-end4"/>
+                    </div>
+                    <h3 class="auth-title3">五年生</h3>
+                    <div>
+                        <label for="signup-prefectures5">都道府県：</label>
+                        <select class="prefectures" id="signup-prefectures5" name="prefectures5"
+                            data-id="elementary5">
+                            <option value="">選択してください</option>
+                        </select>
+                        <label for="signup-municipalities5">市区町村：</label>
+                        <select class="municipalities" id="signup-municipalities5" name="municipalities5"
+                            data-id="elementary5" disabled>
+                            <option value="">選択してください</option>
+                        </select>
+                        <label for="signup-elementary-schoolname5">出身小学校：</label>
+                        <select class="school_name" id="signup-elementary-schoolname5" name="school_name5"
+                            data-id="elementary5" disabled>
+                            <option value="">選択してください</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="signup-elementary-class5">クラス</label>
+                        <input type="text" name="elementary-class5" id="signup-elementary-class5"/>
+                    </div>
+                    <div>
+                        <label for="signup-elementary-start5">在籍期間</label>
+                        <input type="month" name="elementary-start5" id="signup-elementary-start5"/>
+                        <label for="signup-elementary-end5">～</label>
+                        <input type="month" name="elementary-end5" id="signup-elementary-end5"/>
+                    </div>
+                    <h3 class="auth-title3">六年生</h3>
+                    <div>
+                        <label for="signup-prefectures6">都道府県：</label>
+                        <select class="prefectures" id="signup-prefectures6" name="prefectures6"
+                            data-id="elementary6">
+                            <option value="">選択してください</option>
+                        </select>
+                        <label for="signup-municipalities6">市区町村：</label>
+                        <select class="municipalities" id="signup-municipalities6" name="municipalities6"
+                            data-id="elementary6" disabled>
+                            <option value="">選択してください</option>
+                        </select>
+                        <label for="signup-elementary-schoolname6">出身小学校：</label>
+                        <select class="school_name" id="signup-elementary-schoolname6" name="school_name6"
+                            data-id="elementary6" disabled>
+                            <option value="">選択してください</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="signup-elementary-class6">クラス</label>
+                        <input type="text" name="elementary-class6" id="signup-elementary-class6"/>
+                    </div>
+                    <div>
+                        <label for="signup-elementary-start6">在籍期間</label>
+                        <input type="month" name="elementary-start6" id="signup-elementary-start6"/>
+                        <label for="signup-elementary-end6">～</label>
+                        <input type="month" name="elementary-end6" id="signup-elementary-end6"/>
+                    </div>
+                    -->
+
+                    <div class="auth-button-container">
+                        {% with messages = get_flashed_messages() %} {% if messages %}
+                        <ul class="flashes">
+                          {% for message in messages %}
+                          <li>{{ message }}</li>
+                          {% endfor %}
+                        </ul>
+                        {% endif %} {% endwith %}
+                        <button class="auth-button">登録</button>
+                        <a class="switch-auth-mode" href="{{ url_for('login_view') }}">
+                            キャンセル
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/history_resist.js') }}"></script>
 </body>
 </html>
