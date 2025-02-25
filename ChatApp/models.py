@@ -17,7 +17,7 @@ class User:
             with conn.cursor() as cur:
                 sql = """
                     INSERT INTO users (uid, user_name, email, password, kindergarten_schoolname, kindergarten_start_year, kindergarten_end_year, elementary_schoolname, elementary_start_year, elementary_end_year)
-                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);
+                    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
                 """
                 cur.execute(sql, (uid, name, email, password, kindergarten_schoolname, kindergarten_start_year, kindergarten_end_year, elementary_schoolname, elementary_start_year, elementary_end_year))
                 uid = cur.lastrowid
