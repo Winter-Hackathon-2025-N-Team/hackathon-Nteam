@@ -1,14 +1,33 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="jp">
 <head>
-    <meta charset="UTF-8">
-    <title>ホーム</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>home</title>
+    <link rel="stylesheet" href="../static/css/base.css">
+    <link rel="stylesheet" href="../static/css/color.css">
+    <link rel="stylesheet" href="../static/css/auth.css">
 </head>
 <body>
-    <h2>ホームページ</h2>
-    <p>ログイン成功しました！</p>
-    <form action="{{ url_for('logout') }}" method="post">
-        <button type="submit">ログアウト</button>
-    </form>
+    <div class="auth-wrapper">
+        <div class="auth-container">
+            <div class="auth-form-wrapper_log">
+                    <form action="{{ url_for('logout') }}" method="post">
+                    
+                    <h1 class="auth-title">ホームページ</h1>
+                    <h2 class="auth-title2">トーク一覧表示予定箇所</h2>
+
+                    <div class="auth-button-container">
+                    <button class="auth-button darkblue">ログアウト</button>
+                    <button class="auth-button darkblue">ルーム作成(予定)</button>
+                    <button class="auth-button darkblue">知り合いかも(予定)</button>
+                    <button class="auth-button darkblue">トーク詳細表示⇒メッセージ送信(予定)</button>
+                    <button class="auth-button darkblue">プロフィール表示(予定)</button>
+                    </form>
+                </div>
+             </div>
+        </div>
+    </div>       
 </body>
 </html>
