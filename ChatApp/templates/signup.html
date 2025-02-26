@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>signup</title>
-    <link rel="stylesheet" href="../static/css/auth.css">
+    <link rel="stylesheet" href="../static/css/base.css">
     <link rel="stylesheet" href="../static/css/color.css">
     <link rel="stylesheet" href="../static/css/auth.css">
 </head>
@@ -14,7 +14,7 @@
     <div class="auth-wrapper">
         <div class="auth-container">
             <div class="auth-form-wrapper">
-                                    <!--
+                                    <!--doc
                 <form class="auth-form signup" action="home.html" method="get">
                 -->
                 <form class="auth-form signup" action="{{ url_for('signup_process') }}" method="post">
@@ -62,17 +62,17 @@
                         <label for="signup-prefectures-nensyo">都道府県：</label>
                         <select class="prefectures" id="signup-prefectures-nensyo" name="prefectures-nensyo"
                             data-id="kindergarten_nensyo">
-                            <option value="">選択してください</option>
+                            <option value="">Select an option</option>
                         </select>
                         <label for="signup-municipalities-nensyo">市区町村：</label>
                         <select class="municipalities" id="signup-municipalities-nensyo"
                             name="municipalities-nensyo" data-id="kindergarten_nensyo" disabled>
-                            <option value="">選択してください</option>
+                            <option value="">Select an option</option>
                         </select>
                         <label for="signup-kindergarten-schoolname-nensyo">出身園：</label>
                         <select class="school_name" id="signup-kindergarten-schoolname-nensyo"
                             name="kindergartenName" data-id="kindergarten_nensyo" disabled>
-                            <option value="">選択してください</option>
+                            <option value="">Select an option</option>
                         </select>
                     </div>
                     <!--
@@ -83,11 +83,11 @@
                     -->
                     <div>
                         <label for="signup-kindergarten-start-nensyo">入園年(1900以上2100未満)</label>
-                        <input type="number" min="1900" max="2100" name="startYearKindergarten" id="signup-kindergarten-start-nensyo" required/>
+                        <input type="number" placeholder="Kindergarten entry year" min="1900" max="2100" name="startYearKindergarten" id="signup-kindergarten-start-nensyo" required/>
                     </div>
                     <div>
                         <label for="signup-kindergarten-end-nensyo">卒園年(1900以上2100未満)</label>
-                        <input type="number" min="1900" max="2100" name="endYearKindergarten" id="signup-kindergarten-end-nensyo" required/>
+                        <input type="number" placeholder="Kindergarten graduation year" min="1900" max="2100" name="endYearKindergarten" id="signup-kindergarten-end-nensyo" required/>
                     </div>
                     <!--
                     <h3 class="auth-title3">年中</h3>
@@ -153,24 +153,20 @@
                                         -->
 
                     <div>
-                    <label for="signup-prefectures1">都道府県：</label>
+                        <label for="signup-prefectures1">都道府県：</label>
                         <select class="prefectures" id="signup-prefectures1" name="prefectures1"
                             data-id="elementary1">
-                            <option value="">選択してください</option>
+                            <option value="">Select an option</option>
                         </select>
-                    </div>
-                    <div>
                         <label for="signup-municipalities1">市区町村：</label>
                         <select class="municipalities" id="signup-municipalities1" name="municipalities1"
                             data-id="elementary1" disabled>
-                            <option value="">選択してください</option>
+                            <option value="">Select an option</option>
                         </select>
-                    </div>
-                    <div>
                         <label for="signup-elementary-schoolname1">出身小学校：</label>
                         <select class="school_name" id="signup-elementary-schoolname1" name="elementarySchoolName"
                             data-id="elementary1" disabled>
-                            <option value="">選択してください</option>
+                            <option value="">Select an option</option>
                         </select>
                     </div>
                     <!--
@@ -181,11 +177,11 @@
                     -->
                     <div>
                         <label for="signup-elementary-start1">入学年(1900以上2100未満)</label>
-                        <input type="number" min="1900" max="2100" name="startYearElementarySchool" id="signup-elementary-start1" required/>
+                        <input type="number" placeholder="Elementary school entry year" min="1900" max="2100" name="startYearElementarySchool" id="signup-elementary-start1" required/>
                     </div>
                     <div>
                         <label for="signup-elementary-end1">卒業年(1900以上2100未満)</label>
-                        <input type="number" min="1900" max="2100" name="endYearElementarySchool" id="signup-elementary-end1" required/>
+                        <input type="number" placeholder="Elementary school graduation year" min="1900" max="2100" name="endYearElementarySchool" id="signup-elementary-end1" required/>
                     </div>
                     <!--
                     <h3 class="auth-title3">二年生</h3>
@@ -338,7 +334,7 @@
                           {% endfor %}
                         </ul>
                         {% endif %} {% endwith %}
-                        <button class="auth-button">登録</button>
+                        <button class="auth-button darkblue">登録</button>
                         <a class="switch-auth-mode" href="{{ url_for('login_view') }}">
                             キャンセル
                         </a>
